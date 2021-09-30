@@ -1,4 +1,6 @@
 /* 
+Rishita Sarin & Merwan Yeditha
+
 heehoo
 */
 
@@ -15,37 +17,40 @@ void setup() {
   Serial.begin(9600);
   pan.attach(9);
   tilt.attach(10);
-  
+  pan.write(pos_pan);
+  tilt.write(pos_tilt);
+  delay(1000);
   // attaches the servo on pin 9 to the servo object
 }
 
 void loop() {
   // Pan left-to-right
-  while(pos_tilt < 180) {
-      for (pos_pan = 0; pos_pan <= 180; pos_pan += 1) {
+  while(pos_tilt < 40) {
+      for (pos_pan = 0; pos_pan <= 90; pos_pan += 1) {
         pan.write(pos_pan);
-        delay(15);
+        delay(50);
         Serial.print(pos_pan);
         Serial.print(" ");
         Serial.print(pos_tilt);
         Serial.print(" ");
         Serial.println(analogRead(sensorPin));
       }
-      pos_tilt += 10;
+      pos_tilt += 2;
       tilt.write(pos_tilt);
       delay(50);
-      for (pos_pan = 180; pos_pan >= 0; pos_pan -= 1) {
+      for (pos_pan = 90; pos_pan >= 0; pos_pan -= 1) {
         pan.write(pos_pan);             
-        delay(15);
+
+        delay(50);
         Serial.print(pos_pan);
         Serial.print(" ");
         Serial.print(pos_tilt);
         Serial.print(" ");
         Serial.println(analogRead(sensorPin));
       }
-      pos_tilt += 10;
+      pos_tilt += 2;
       tilt.write(pos_tilt);
       delay(50);
   }
-  Serial.println("Finished");
+  Serial.println("finished");
 }
